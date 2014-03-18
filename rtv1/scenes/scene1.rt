@@ -1,0 +1,25 @@
+#
+# Scene 1 by ibakayok
+#
+scene
+	name
+		verysimple
+	camera
+		0
+		0
+		0
+	render
+		1800
+		800
+		90
+# Objet
+object
+	name
+		bouboule
+	sphere
+		0
+		0
+		-5
+		1
+		0xFF0000
+#end
