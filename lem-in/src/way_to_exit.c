@@ -6,7 +6,7 @@
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/23 04:30:15 by ibakayok          #+#    #+#             */
-/*   Updated: 2014/03/16 19:41:05 by ibakayok         ###   ########.fr       */
+/*   Updated: 2014/03/18 20:14:18 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,26 @@ int		isfm(t_ant *ant, char *str)
 t_env	*found_way(t_env *env, t_env *src, int	i)
 {
 	t_env	*tmp;
+	t_tup	*tmp2;
 
 	tmp = NULL;
-	if (src != NULL)
-		src->next = NULL;
-	//ft_printf("name = %s && %d\n", src->name, i);
+	if (src == NULL)
+		return (ft_printf("ca a foirer %d\n", i), src);
+	tmp2 = src->tup;
+	ft_printf("[%d] = [%s]\n", i, src->name);
+	src->next = NULL;
 	if (src->stat == 2)
 		return (src);
 	if (i == 0)
 		return (NULL);
-	while (src->tup)
+	while (tmp2)
 	{
-		if ((tmp = found_way(env, found_name(env, src->tup->name), i - 1)))
+		if ((tmp = found_way(env, found_name(env, tmp2->name), i - 1)) != NULL)
+		{
+			ft_printf("ca a pas foirer %d\n", i);
 			src->next = tmp;
-		src->tup = src->tup->next;
+		}
+		tmp2 = tmp2->next;
 	}
 	return (src);
 }
@@ -55,6 +61,9 @@ t_env	*mk_way(t_env *env)
 	if (found_stat(env, 2) == NULL || (tmp = found_stat(env, 1)) == NULL)
 		return (write(2, "Error : Missing start or end\n", 29), NULL);
 	tmp = found_way(env, tmp, found_max(env));
+	if (tmp->next == NULL)
+		return (write(2, "Error : No way\n", 15), NULL);
+	ft_printf("tmp = %s, tmp->next = %s\n", tmp->name, tmp->next->name);
 	return (tmp);
 }
 

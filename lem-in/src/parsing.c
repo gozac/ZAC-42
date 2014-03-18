@@ -6,7 +6,7 @@
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/17 15:59:17 by ibakayok          #+#    #+#             */
-/*   Updated: 2014/03/16 15:28:23 by ibakayok         ###   ########.fr       */
+/*   Updated: 2014/03/18 19:52:07 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		add_tuple(t_env **env, char *line)
 
 int		add_lab(t_env **env, char *line, int *p, int nb)
 {
-	if (line[0] == 'L'|| is_tiret(line) >= 1)
+	if (line[0] == 'L'|| is_tiret(line) > 0)
 		return (-1);
 	if (*env == NULL)
 	{
@@ -96,7 +96,7 @@ t_env	*mk_env(t_env *anthill, int p, char *line)
 	if (ft_isalldigit(line) == 1 && ft_printf("%s\n", line))
 	{
 		nb = ft_atoi(line);
-		while (get_next_line(0, &line) && ft_printf("%s\n", line) && p != 5)
+		while (p != 5 && get_next_line(0, &line) && ft_printf("%s\n", line))
 		{
 			if (isstats(line, &p) == 0 && line[0] != '#')
 			{
