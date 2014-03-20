@@ -6,20 +6,22 @@
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/23 04:30:15 by ibakayok          #+#    #+#             */
-/*   Updated: 2014/03/18 20:14:18 by ibakayok         ###   ########.fr       */
+/*   Updated: 2014/03/20 18:51:37 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem.h"
 
-int		isfm(t_ant *ant, char *str)
+int		isfm(t_ant *ant, t_env *tmp2)
 {
 	t_ant	*tmp;
 
 	tmp = ant;
+	if (tmp2->next == NULL)
+		return (0);
 	while (tmp)
 	{
-		if (ft_strcmp(tmp->pos, str) == 0)
+		if (ft_strcmp(tmp->pos, tmp2->name) == 0)
 			return (1);
 		tmp = tmp->next;
 	}
@@ -33,13 +35,13 @@ t_env	*found_way(t_env *env, t_env *src, int	i)
 
 	tmp = NULL;
 	if (src == NULL)
-		return (ft_printf("ca a foirer %d\n", i), src);
+		return (ft_printf("ca a foirer %d\n", i), NULL);
 	tmp2 = src->tup;
 	ft_printf("[%d] = [%s]\n", i, src->name);
-	src->next = NULL;
+	//src->next = NULL;
 	if (src->stat == 2)
 		return (src);
-	if (i == 0)
+	if (i <= 0)
 		return (NULL);
 	while (tmp2)
 	{
@@ -50,6 +52,7 @@ t_env	*found_way(t_env *env, t_env *src, int	i)
 		}
 		tmp2 = tmp2->next;
 	}
+	ft_printf("i win !!!\n");
 	return (src);
 }
 
@@ -78,11 +81,11 @@ int		mk_move(t_env *way, t_ant **fm)
 	while (tmp)
 	{
 		tmp2 = found_name(way, tmp->pos);
-		if (tmp2->next != NULL && (*fm) != NULL && isfm((*fm), tmp2->next->name) != 1)
+		if (tmp2->next != NULL && (*fm) != NULL && isfm((*fm), tmp2->next) != 1)
 		{
 			p = 1;
 			tmp->pos = tmp2->next->name;
-			ft_printf("L%d-%s", tmp->num, tmp->pos);
+			ft_printf("L%d-%s ", tmp->num, tmp->pos);
 		}
 		tmp = tmp->next;
 	}
