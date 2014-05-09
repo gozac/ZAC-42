@@ -6,7 +6,7 @@
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/22 20:50:43 by ibakayok          #+#    #+#             */
-/*   Updated: 2014/01/19 21:00:29 by ibakayok         ###   ########.fr       */
+/*   Updated: 2014/04/27 22:54:16 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,10 @@ int		ft_printf(const char *format, ...)
 {
 	va_list	ap;
 	int		i;
-	int		ret;
 	int		l;
 
 	i = 0;
 	l = 0;
-	ret = 0;
 	va_start(ap, format);
 	while (format[i])
 	{

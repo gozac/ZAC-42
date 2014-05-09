@@ -6,7 +6,7 @@
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/22 19:04:58 by ibakayok          #+#    #+#             */
-/*   Updated: 2014/02/16 19:44:23 by ibakayok         ###   ########.fr       */
+/*   Updated: 2014/04/26 20:15:53 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	trace_seg4(void *mlx, void *win, t_dingue dingue, int z)
 	{
 		y = (dingue.x + ((dingue.xup - dingue.x) * (x - dingue.y))
 		/ (dingue.yup - dingue.y));
-		mlx_pixel_put(mlx, win, (y + 942), (x + 150), 0xFFFFFF - i);
+		mlx_pixel_put(mlx, win, (y + 942), (x + 150), 0xFFFFFF);
 		x++;
 		i = i * 10;
 	}
@@ -97,7 +97,7 @@ void	trace_seg3(void *mlx, void *win, t_dingue dingue, int z)
 	{
 		y = (dingue.yup + ((dingue.y - dingue.yup) * (x - dingue.xup))
 		/ (dingue.x - dingue.xup));
-		mlx_pixel_put(mlx, win, (x + 942), (y + 150), 0xFFFFFF - i);
+		mlx_pixel_put(mlx, win, (x + 942), (y + 150), 0xFFFFFF);
 		x++;
 		i = i * 10;
 	}
