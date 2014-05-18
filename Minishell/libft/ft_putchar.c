@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_freestrtab.c                                    :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/25 19:30:04 by ibakayok          #+#    #+#             */
-/*   Updated: 2013/12/25 19:32:03 by ibakayok         ###   ########.fr       */
+/*   Created: 2013/12/22 21:49:40 by ibakayok          #+#    #+#             */
+/*   Updated: 2013/12/22 22:06:02 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include			<stdlib.h>
+#include <unistd.h>
 
-void	ft_freestrtab(char ***tab)
+int		ft_putchar(char c)
 {
-	int				i;
-
-	i = 0;
-	while (*tab[i])
-	{
-		free(*tab[i]);
-		*tab[i++] = NULL;
-	}
-	free(*tab);
-	*tab = NULL;
+	write(1, &c, 1);
+	return (1);
 }

@@ -6,12 +6,11 @@
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/28 17:34:40 by ibakayok          #+#    #+#             */
-/*   Updated: 2013/12/29 23:10:45 by ibakayok         ###   ########.fr       */
+/*   Updated: 2014/04/27 21:31:23 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "myshell.h"
-
+#include "shell.h"
 
 int		ft_csrealloc(char ***garot, char *s)
 {
@@ -38,15 +37,18 @@ int		ft_csrealloc(char ***garot, char *s)
 	return (0);
 }
 
-int		ft_cs(char *s, int c)
+int		ft_s(char *s, int c)
 {
 	char	ret;
 	int		i;
 
 	i = 0;
-	ret = (char)c;
-	while (s[i] != '\0' && s[i] != ret)
-		i++;
+	if (s)
+	{
+		ret = (char)c;
+		while (s[i] != '\0' && s[i] != ret)
+			i++;
+	}
 	return (i);
 }
 
@@ -54,24 +56,26 @@ int		ft_setenv(char *name, char *value, int overwrite, char ***ft_env)
 {
 	int		i;
 	char	**bis;
+	int		n;
 
-	bis = *ft_env;
 	i = 0;
-	while (bis[i] != '\0')
-	{
-		if (ft_strcmp(ft_strndup(bis[i], ft_cs(bis[i], '=')), name) == 0)
-		{
-			if (overwrite == 0)
-			{
-				name = ft_strjoin(name, "=");
-				bis[i] = ft_strjoin(name, value);
-				*ft_env = bis;
-			}
-			return (0);
-		}
+	n = 0;
+	while ((*ft_env)[i] != '\0')
 		i++;
+	bis = (char **)malloc(sizeof(char *) * (i + 1));
+	bis[i + 1] = NULL;
+	i = 0;
+	while ((*ft_env)[n] != '\0')
+	{
+		if (!ft_strcmp(ft_strndup((*ft_env)[n], ft_s((*ft_env)[n], '=')), name)
+			&& overwrite == 0)
+			bis[i++] = ft_strjoin(ft_strjoin(name, "="), value);
+		else
+			bis[i++] = (*ft_env)[n];
+		n++;
 	}
-	name = ft_strjoin(name, "=");
-	i = ft_csrealloc(ft_env, ft_strjoin(name, value));
+	if (i == n)
+		bis[i] = ft_strjoin(ft_strjoin(name, "="), value);
+	*ft_env = bis;
 	return (0);
 }

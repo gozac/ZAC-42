@@ -6,12 +6,12 @@
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/28 12:46:07 by ibakayok          #+#    #+#             */
-/*   Updated: 2013/12/29 22:36:16 by ibakayok         ###   ########.fr       */
+/*   Updated: 2014/04/27 21:29:42 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/stat.h>
-#include "myshell.h"
+#include "shell.h"
 
 char	*ft_chrrdup(char *s, int c)
 {
@@ -46,15 +46,13 @@ int		good(char *path, char *tmp)
 	struct stat		sts;
 
 	if (access(path, F_OK) != 0 || access(path, R_OK) != 0)
-		{
-			if (access(path, F_OK) != 0)
-				ft_putstr("cd : no such file or directory: ");
-			else
-				ft_putstr("cd : permission denied: ");
-			ft_putstr(tmp);
-			ft_putstr("\n");
-			return (-1);
-		}
+	{
+		if (access(path, F_OK) != 0)
+			ft_printf("cd : no such file or directory: %s\n", tmp);
+		else
+			ft_printf("cd : permission denied: %s\n", tmp);
+		return (-1);
+	}
 	stat(path, &sts);
 	if ((sts.st_mode & S_IFMT) != S_IFDIR)
 	{
@@ -69,23 +67,23 @@ int		good(char *path, char *tmp)
 int		cd(char **data, char ***ft_env)
 {
 	char	*tmp;
+	char	*tmp2;
 
-	if (data == '\0')
+	if (data)
 	{
-		ft_env[0][14] = ft_strjoin("pwd=", ft_env[0][3] + 5);
-		return (chdir(ft_env[0][3] + 5));
-	}
-	else
-	{
-		if (data[1][0] == '-')
-			return (-1);
+		tmp2 = ft_strdup(ft_env[0][14]);
 		tmp = data[1];
-		data[1] = ft_strjoin("/", data[1]);
-		ft_env[0][14] = ft_strjoin(ft_env[0][14], data[1]);
-		data[1] = ft_strdup(ft_env[0][14] + 4);
+		tmp = ft_strjoin("/", tmp);
+		ft_env[0][14] = ft_strjoin(ft_env[0][14], tmp);
+		tmp = ft_strdup(ft_env[0][14] + 4);
 		ft_env[0][14] = clear_pwd(ft_env[0][14]);
-		if (good(data[1], tmp) != 0)
+		if (good(tmp, data[1]) != 0)
+		{
+			ft_env[0][14] = tmp2;
 			return (-1);
-		return (chdir(data[1]));
+		}
+		return (chdir(tmp));
 	}
+	ft_env[0][14] = ft_strjoin("PWD=", ft_env[0][3] + 5);
+	return (chdir(ft_env[0][3] + 5));
 }

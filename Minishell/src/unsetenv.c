@@ -6,42 +6,37 @@
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/28 17:34:47 by ibakayok          #+#    #+#             */
-/*   Updated: 2013/12/29 23:10:56 by ibakayok         ###   ########.fr       */
+/*   Updated: 2014/04/27 21:31:54 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "myshell.h"
-
-int		ft_sc(char *s, int c)
-{
-	char	ret;
-	int		i;
-
-	i = 0;
-	ret = (char)c;
-	while (s[i] != '\0' && s[i] != ret)
-		i++;
-	return (i);
-}
+#include "shell.h"
 
 int		ft_unsetenv(char *name, char ***ft_env)
 {
-	int		i;
-	char	**bis;
+	t_tmp	t;
 
-	i = 0;
-	bis = *ft_env;
-	while (bis[i] != '\0')
+	t.b = 0;
+	t.n = 0;
+	t.i = 0;
+	t.ret = -1;
+	if (name == NULL)
+		return (t.ret);
+	while ((*ft_env)[t.b] != '\0')
+		t.b++;
+	t.bis = (char **)malloc(sizeof(char *) * (t.b - 1));
+	t.bis[t.b - 1] = NULL;
+	while (t.i < (t.b - 1))
 	{
-		if (ft_strcmp(ft_strndup(bis[i], ft_sc(bis[i], '=')), name) == 0)
-		{
-			bis[i] = "(null)";
-			return (0);
-		}
-		i++;
+		if (ft_strncmp((*ft_env)[t.n], name, ft_strlen(name)) == 0)
+			t.ret = 0;
+		else
+			t.bis[t.i++] = (*ft_env)[t.n];
+		t.n++;
 	}
-	ft_putstr("unsetenv : not in environ : ");
-	ft_putstr(name);
-	ft_putstr("\n");
-	return (-1);
+	if (t.ret == -1)
+		ft_printf("unsetenv : not in environ : %s\n", name);
+	else
+		*ft_env = t.bis;
+	return (t.ret);
 }

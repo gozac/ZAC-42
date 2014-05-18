@@ -6,7 +6,7 @@
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/29 15:43:55 by ibakayok          #+#    #+#             */
-/*   Updated: 2013/12/08 21:54:11 by ibakayok         ###   ########.fr       */
+/*   Updated: 2014/04/15 17:01:39 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	*ft_memccpy(void *s1, const void *s2, int c, size_t n)
 		p++;
 		t++;
 		if (*(p - 1) == c)
-			return ((void *) p);
+			return ((void *)p);
 	}
 	return (NULL);
 }

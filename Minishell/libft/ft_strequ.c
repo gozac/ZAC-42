@@ -6,7 +6,7 @@
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/29 17:50:54 by ibakayok          #+#    #+#             */
-/*   Updated: 2013/12/01 23:26:48 by ibakayok         ###   ########.fr       */
+/*   Updated: 2014/04/15 17:04:59 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int		ft_strequ(char const *s1, char const *s2)
 		return (0);
 	while (*s1 && *s2 && *s1 == *s2)
 	{
-			s1++;
-			s2++;
+		s1++;
+		s2++;
 	}
 	if (*s1 == *s2)
 		return (1);

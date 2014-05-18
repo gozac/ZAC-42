@@ -1,27 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_notabspace.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/26 16:45:08 by ibakayok          #+#    #+#             */
-/*   Updated: 2013/12/29 22:04:47 by ibakayok         ###   ########.fr       */
+/*   Created: 2014/02/16 16:59:00 by ibakayok          #+#    #+#             */
+/*   Updated: 2014/05/15 17:26:40 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "myshell.h"
+#include "libft.h"
 
-int		env(char **ft_env)
+char	*ft_tab_spa(char *str)
 {
-	int		count;
+	char	*tmp;
+	int		i;
+	int		p;
 
-	count = 0;
-	while (ft_env[count] != NULL)
+	i = 0;
+	p = 0;
+	tmp = (char *)malloc(sizeof(char) * ft_strlen(str));
+	while (*str)
 	{
-		ft_putstr(ft_env[count]);
-		ft_putstr("\n");
-		count++;
+		if ((*str == ' ' || *str == '	') && p == 0)
+		{
+				tmp[i++] = ' ';
+				p = 1;
+		}
+		else if (!(*str == ' ' || *str == '	'))
+		{
+			tmp[i++] = *str;
+			p = 0;
+		}
+		str++;
 	}
-	return (0);
+	tmp[i] = '\0';
+	return (tmp);
 }

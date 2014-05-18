@@ -6,7 +6,7 @@
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/29 15:43:55 by ibakayok          #+#    #+#             */
-/*   Updated: 2013/12/08 23:10:49 by ibakayok         ###   ########.fr       */
+/*   Updated: 2014/04/15 17:04:29 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strdup(const char *s1)
 
 	len = ft_strlen(s1);
 	i = -1;
-	if ((ret = (char *) malloc(sizeof(*ret) * (len + 1))) == NULL)
+	if ((ret = (char *)malloc(sizeof(*ret) * (len + 1))) == NULL)
 		return (NULL);
 	while (++i < len)
 		ret[i] = s1[i];

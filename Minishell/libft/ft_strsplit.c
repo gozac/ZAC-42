@@ -6,14 +6,14 @@
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/25 19:20:57 by ibakayok          #+#    #+#             */
-/*   Updated: 2013/12/28 16:44:36 by ibakayok         ###   ########.fr       */
+/*   Updated: 2014/01/19 21:38:22 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-char	*ft_strndup(const char *s1, size_t n)
+char		*ft_strndup(const char *s1, size_t n)
 {
 	size_t	len;
 	char	*s2;

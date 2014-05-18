@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_execute.c                                       :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/26 18:28:28 by ibakayok          #+#    #+#             */
-/*   Updated: 2013/12/29 18:52:55 by ibakayok         ###   ########.fr       */
+/*   Created: 2013/12/26 16:45:08 by ibakayok          #+#    #+#             */
+/*   Updated: 2014/04/27 21:01:45 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/wait.h>
-#include <sys/types.h>
-#include "myshell.h"
+#include "shell.h"
 
-int		ft_exec(char *path, char **argv)
+int		env(char **ft_env)
 {
-	pid_t	father;
+	int		count;
 
-	if (access(path, X_OK) == -1)
-		return (-1);
-	father = fork();
-	if (father == 0)
+	count = 0;
+	while (ft_env[count] != NULL)
 	{
-		execve(path, argv, environ);
-		exit (0);
+		if (ft_env[count])
+			ft_printf("%s\n", ft_env[count]);
+		count++;
 	}
-	if (father > 0)
-		waitpid(father, 0, 0);
 	return (0);
 }

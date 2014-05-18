@@ -6,7 +6,7 @@
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/28 13:27:53 by ibakayok          #+#    #+#             */
-/*   Updated: 2013/12/08 23:03:56 by ibakayok         ###   ########.fr       */
+/*   Updated: 2014/01/19 21:36:12 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ char	*ft_strcat(char *s1, const char *s2)
 
 	j = -1;
 	i = -1;
-	while (s1[++i]);
+	while (s1[++i])
+		;
 	while (s2[++j])
 	{
 		s1[i] = s2[j];

@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_interpreteur.c                                  :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/25 18:33:11 by ibakayok          #+#    #+#             */
-/*   Updated: 2013/12/29 18:52:48 by ibakayok         ###   ########.fr       */
+/*   Created: 2013/12/05 17:18:42 by ibakayok          #+#    #+#             */
+/*   Updated: 2014/04/23 18:55:22 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "myshell.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-int		ft_interpreteur(char **data)
-{
-	char	*path;
+# include "libft.h"
 
-	if ((path = search(data[0], environ[0])) == 0)
-	{
-		ft_putstr("command not found\n");
-		return (-1);
-	}
-	else
-	{
-		path = ft_strjoin(path, "/");
-		path = ft_strjoin(path, data[0]);
-		ft_exec(path, data);
-		return (0);
-	}
-}
+# define BUFF_SIZE 32
+
+int		get_next_line(int const fd, char **line);
+
+#endif
+

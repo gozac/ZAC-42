@@ -6,40 +6,11 @@
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/29 19:36:46 by ibakayok          #+#    #+#             */
-/*   Updated: 2013/12/19 17:38:35 by ibakayok         ###   ########.fr       */
+/*   Updated: 2014/04/15 17:09:21 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-int		bis(char const *s);
-int		bis2(char const *s);
-
-char	*ft_strtrim(char const *s)
-{
-	char	*ret;
-	int		i;
-	int		n;
-
-	ret = ft_strnew(ft_strlen(s));
-	if (s != NULL)
-	{
-		i = bis(s);
-		n = bis2(s);
-		if (ret == NULL)
-			return (NULL);
-		ret[i + 1] = '\0';
-		while (i > 0)
-		{
-			ret[i] = s[n];
-			i--;
-			n--;
-		}
-		ret[i] = s[n];
-	}
-	return (ret);
-}
-
 
 int		bis(char const *s)
 {
@@ -83,4 +54,29 @@ int		bis2(char const *s)
 		i--;
 	}
 	return (n);
+}
+
+char	*ft_strtrim(char const *s)
+{
+	char	*ret;
+	int		i;
+	int		n;
+
+	ret = ft_strnew(ft_strlen(s));
+	if (s != NULL)
+	{
+		i = bis(s);
+		n = bis2(s);
+		if (ret == NULL)
+			return (NULL);
+		ret[i + 1] = '\0';
+		while (i > 0)
+		{
+			ret[i] = s[n];
+			i--;
+			n--;
+		}
+		ret[i] = s[n];
+	}
+	return (ret);
 }

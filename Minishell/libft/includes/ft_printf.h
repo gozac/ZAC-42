@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/05 17:18:42 by ibakayok          #+#    #+#             */
-/*   Updated: 2013/12/08 23:24:18 by ibakayok         ###   ########.fr       */
+/*   Created: 2014/01/19 19:31:10 by ibakayok          #+#    #+#             */
+/*   Updated: 2014/02/09 16:20:01 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-# include "libft/includes/libft.h"
-
-# define BUFF_SIZE 32
-
-int		get_next_line(int const fd, char ** line);
+int			ft_printf(const char *format, ...);
+size_t		ft_strlen(const char *str);
+int			ft_putstr(char *str);
+int			ft_putnbr(int n);
+int			ft_putchar(char c);
 
 #endif
-

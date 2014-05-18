@@ -6,7 +6,7 @@
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/29 19:19:32 by ibakayok          #+#    #+#             */
-/*   Updated: 2013/12/06 19:07:00 by ibakayok         ###   ########.fr       */
+/*   Updated: 2014/04/15 17:05:17 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,3 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	ret = ft_strnew(ft_strlen(s1) + ft_strlen(s2));
 	return (ft_strcat(ft_strcpy(ret, s1), s2));
 }
-

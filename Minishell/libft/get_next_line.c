@@ -6,45 +6,13 @@
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/03 15:09:26 by ibakayok          #+#    #+#             */
-/*   Updated: 2013/12/08 23:35:40 by ibakayok         ###   ########.fr       */
+/*   Updated: 2014/04/15 17:12:43 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include "get_next_line.h"
-
-static int		ft_isnewline(char *str);
-static int		ft_realloc(char **str, int size, int p);
-static int		blocDingue(char **tmp, char **line, char *bf, int *p);
-static int		blocFaible(char **line, char **tmp, int *p);
-
-int		get_next_line(int const fd, char **line)
-{
-	int			ret;
-	char		bf[BUFF_SIZE + 1];
-	static char	*tmp;
-	static int	p = 1;
-
-	p = ft_realloc(line, BUFF_SIZE + 1, p);
-	if (tmp != NULL && ft_isnewline(tmp) == 1)
-		return (blocFaible(line, &tmp, &p));
-	if ((ret = read(fd, bf, BUFF_SIZE)) == -1)
-		return (-1);
-	bf[ret] = '\0';
-	if (ft_isnewline(bf) == 1 && ret != 0)
-		return (blocDingue(&tmp, line, bf, &p));
-	else if (ret == 0)
-	{
-		*line = ft_strjoin(*line, bf);
-		return (0);
-	}
-	else
-	{
-		*line = ft_strcat(*line, bf);
-		return (get_next_line(fd, line));
-	}
-}
 
 static int		ft_isnewline(char *str)
 {
@@ -77,7 +45,7 @@ static int		ft_realloc(char **line, int size, int i)
 	}
 }
 
-static int		blocDingue(char **tmp, char **line, char *bf, int *p)
+static int		blocdingue(char **tmp, char **line, char *bf, int *p)
 {
 	char		*temp;
 
@@ -90,17 +58,44 @@ static int		blocDingue(char **tmp, char **line, char *bf, int *p)
 		ft_strcat(*line, temp);
 		free(temp);
 	}
-		free(*tmp);
-		*line = ft_strjoin(*line, ft_strsub(bf, 0, ft_strchr(bf, '\n') - bf));
-		*p = 1;
-		*tmp = ft_strdup(ft_strchr(bf, '\n') + 1);
-		return (1);
+	free(*tmp);
+	*line = ft_strjoin(*line, ft_strsub(bf, 0, ft_strchr(bf, '\n') - bf));
+	*p = 1;
+	*tmp = ft_strdup(ft_strchr(bf, '\n') + 1);
+	return (1);
 }
 
-static int		blocFaible(char **line, char **tmp, int *p)
+static int		blocfaible(char **line, char **tmp, int *p)
 {
 	*line = ft_strsub(*tmp, 0, ft_strchr(*tmp, '\n') - *tmp);
 	*tmp = ft_strdup(ft_strchr(*tmp, '\n') + 1);
 	*p = 1;
 	return (1);
+}
+
+int				get_next_line(int const fd, char **line)
+{
+	int			ret;
+	char		bf[BUFF_SIZE + 1];
+	static char	*tmp;
+	static int	p = 1;
+
+	p = ft_realloc(line, BUFF_SIZE + 1, p);
+	if (tmp != NULL && ft_isnewline(tmp) == 1)
+		return (blocfaible(line, &tmp, &p));
+	if ((ret = read(fd, bf, BUFF_SIZE)) == -1)
+		return (-1);
+	bf[ret] = '\0';
+	if (ft_isnewline(bf) == 1 && ret != 0)
+		return (blocdingue(&tmp, line, bf, &p));
+	else if (ret == 0)
+	{
+		*line = ft_strjoin(*line, bf);
+		return (0);
+	}
+	else
+	{
+		*line = ft_strcat(*line, bf);
+		return (get_next_line(fd, line));
+	}
 }

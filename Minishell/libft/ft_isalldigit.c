@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_isalldigit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/27 14:21:12 by ibakayok          #+#    #+#             */
-/*   Updated: 2014/01/19 20:05:41 by ibakayok         ###   ########.fr       */
+/*   Created: 2014/03/09 15:20:14 by ibakayok          #+#    #+#             */
+/*   Updated: 2014/03/14 17:11:19 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <string.h>
+#include "libft.h"
 
-int		ft_putstr(char *str)
+int		ft_isalldigit(char *str)
 {
-	int		i;
-
-	i = 0;
-	if (str == NULL)
+	if (str[0] == '\0')
+		return (0);
+	while (*str != 0)
 	{
-		ft_putstr("(null)");
-		return (6);
+		if (ft_isdigit((int)*str) == 0)
+			return (0);
+		str++;
 	}
-	else
-	{
-		while (*str)
-		{
-			write(1, str, 1);
-			str++;
-			i++;
-		}
-	}
-	return (i);
+	return (1);
 }

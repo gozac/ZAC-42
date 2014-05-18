@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   search.c                                           :+:      :+:    :+:   */
+/*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/26 17:01:30 by ibakayok          #+#    #+#             */
-/*   Updated: 2013/12/29 18:06:15 by ibakayok         ###   ########.fr       */
+/*   Created: 2014/02/04 19:34:07 by ibakayok          #+#    #+#             */
+/*   Updated: 2014/04/27 21:26:07 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <dirent.h>
-#include "myshell.h"
+#include <sys/wait.h>
+#include <sys/types.h>
+#include "shell.h"
 
-
-char	*search(const char *s, char *path)
+int		ft_exec(char *path, char **argv, char **ft_env)
 {
-	char			**pathway;
-	DIR				*fichier;
-	struct dirent	*lecture;
-	int				i;
+	pid_t	father;
 
-	i = 0;
-	pathway = ft_clean_path(path);
-	while (pathway[i] != '\0')
+	if (access(path, X_OK) == -1)
+		return (-1);
+	father = fork();
+	if (father == 0)
 	{
-		fichier = opendir(pathway[i]);
-		while ((lecture = readdir(fichier)))
-		{
-			if (ft_strcmp(lecture->d_name, s) == 0)
-				return (pathway[i]);
-		}
-		closedir(fichier);
-		i++;
+		execve(path, argv, ft_env);
+		exit (0);
 	}
+	if (father > 0)
+		waitpid(father, 0, 0);
 	return (0);
 }

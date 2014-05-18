@@ -1,22 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_clean_path.c                                    :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/26 17:06:40 by ibakayok          #+#    #+#             */
-/*   Updated: 2013/12/29 17:55:13 by ibakayok         ###   ########.fr       */
+/*   Created: 2013/12/22 20:51:01 by ibakayok          #+#    #+#             */
+/*   Updated: 2014/04/15 18:12:20 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "myshell.h"
+#include "libft.h"
 
-char	**ft_clean_path(char *path)
+int		ft_putnbr(int n)
 {
-	char	**pathway;
+	int		l;
 
-	path = path + 5;
-	pathway = ft_strsplit(path, ':');
-	return (pathway);
+	l = 1;
+	if (n == -2147483648)
+		ft_putstr("-2147483648");
+	else
+	{
+		if (n < 0)
+		{
+			l++;
+			ft_putchar('-');
+			n *= -1;
+		}
+		if (n >= 10)
+		{
+			l += ft_putnbr(n / 10);
+			l += ft_putnbr(n % 10);
+		}
+		else
+			ft_putchar(48 + n);
+	}
+	return (l);
 }

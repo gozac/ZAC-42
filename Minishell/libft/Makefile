@@ -6,7 +6,7 @@
 #    By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/28 13:27:53 by ibakayok          #+#    #+#              #
-#    Updated: 2013/12/25 19:32:54 by ibakayok         ###   ########.fr        #
+#    Updated: 2014/04/23 19:03:02 by ibakayok         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,26 +54,42 @@ SRC 		= ft_putstr.c \
 			  ft_strjoin.c \
 			  ft_strsub.c \
 			  ft_strtrim.c \
-			  ft_freestrtab.c \
 			  ft_strsplit.c \
+			  get_next_line.c \
+			  ft_putnbr.c \
+			  ft_putchar.c \
+			  ft_printf.c \
+			  ft_notabspace.c \
+			  ft_lemchar.c \
+			  ft_isalldigit.c \
 
 
-OBJ 		= $(SRC:.c=.o)
 
-all: mkobj $(NAME)
+OBJ 		=	$(SRC:.c=.o)
 
-mkobj:
-	gcc -Wall -Wextra -Werror -I includes -c $(SRC)
+CFLAGS		=	-Wall -Wextra -Werror -g
 
-$(NAME):
-	ar -rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+CC			=	gcc
+
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	@ar -rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
+
+start:
+	@echo  "\x1b[32;01mCOMPILING---LIBFT"
+	@echo "\x1b[33;01m8\c"
+
+%.o:	%.c
+	@echo "\x1b[33;01m=\c"
+	@$(CC) $(CFLAGS) -c $< -o $@ -I includes
 
 clean:
-	/bin/rm -f $(OBJ)
+	@/bin/rm -f $(OBJ)
 
 fclean: clean
-	/bin/rm -f $(NAME)
+	@/bin/rm -f $(NAME)
 
 re: fclean all
 
