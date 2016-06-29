@@ -6,7 +6,7 @@
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/04/16 15:52:28 by ibakayok          #+#    #+#             */
-/*   Updated: 2015/03/06 17:40:12 by ibakayok         ###   ########.fr       */
+/*   Updated: 2016/03/06 17:33:29 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,35 +48,47 @@ void	ordre_dir(t_opt option, t_wd *tri)
 	}
 }
 
+int		testsolo(t_wd **tri, t_opt option, DIR *fichier, char *str)
+{
+	if (option.i > REC)
+		return (-1);
+	if (!fichier)
+	{
+		if (errno != ENOTDIR)
+		{
+			ft_printf("ls: ");
+			perror(str);
+			return (-1);
+		}
+		*tri = add_tri(*tri, str, option, str);
+		return (1);
+	}
+	return (0);
+}
+
 int		list_dir(t_opt option, char *str)
 {
 	DIR				*fichier;
 	struct dirent	*lecture;
 	t_wd			*tritri;
 	int				i;
+	int				test;
 
 	i = 0;
 	tritri = NULL;
+	test = 0;
 	fichier = opendir(str);
-	if (option.i > REC)
+	if ((test = testsolo(&tritri, option, fichier, str)) == -1)
 		return (0);
-	if (!fichier)
-	{
-		if (errno != ENOTDIR)
-		{
-			ft_printf("ls: ");
-			return (perror(str), 0);
-		}
-		tritri = add_tri(tritri, str, option, NULL);
-	}
-	while (fichier && (lecture = readdir(fichier))) // stocker d_name et faire un tri avant
+	while (fichier && (lecture = readdir(fichier)))
 	{
 		tritri = add_tri(tritri, lecture->d_name, option
 			, ft_strjoin(ft_strjoin(str, "/"), lecture->d_name));
 		i++;
 	}
-	closedir(fichier);
-	//tritri = tri_list(tritri, i);
+	tritri = tri_list(tritri, i);
+	if (test == 0)
+		closedir(fichier);
 	ordre_dir(option, tritri);
 	return (1);
 }

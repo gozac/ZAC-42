@@ -6,7 +6,7 @@
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/04/15 16:54:34 by ibakayok          #+#    #+#             */
-/*   Updated: 2015/03/06 17:36:27 by ibakayok         ###   ########.fr       */
+/*   Updated: 2016/03/02 18:27:45 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include "get_next_line.h"
 
 # define SPACE 4
-# define REC 3
+# define REC 15
 
 t_opt	ini_opt(t_opt option);
 int		is_option(char *str);

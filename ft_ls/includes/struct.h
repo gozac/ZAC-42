@@ -6,7 +6,7 @@
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/04/20 19:06:02 by ibakayok          #+#    #+#             */
-/*   Updated: 2015/03/02 19:57:31 by ibakayok         ###   ########.fr       */
+/*   Updated: 2016/03/02 18:07:20 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct	s_opt
 	int			t;
 	int			i;
 	int			multi;
-	char	 	**words;
+	char		**words;
 }				t_opt;
 
 typedef struct	s_wd

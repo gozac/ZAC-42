@@ -6,7 +6,7 @@
 #    By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/04/15 16:48:24 by ibakayok          #+#    #+#              #
-#    Updated: 2014/04/20 20:59:05 by ibakayok         ###   ########.fr        #
+#    Updated: 2016/03/02 15:34:14 by ibakayok         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ FILES 		= main.c \
 SRC			= $(addprefix src/, $(FILES))
 OBJ			= $(SRC:src/%.c=.obj/%.o)
 INCLUDE		= -I ./includes -I libft/includes
-LIBMLX 		= -L/usr/X11/lib -lXext -lX11 -lmlx -L libft/ -lft
+LIBMLX 		= -lmlx -L libft/ -lft
 
 NO_COLOR=\x1b[0m
 OK_COLOR=\x1b[32;01m

@@ -6,7 +6,7 @@
 /*   By: ibakayok <ibakayok@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/25 19:20:57 by ibakayok          #+#    #+#             */
-/*   Updated: 2014/01/19 21:38:22 by ibakayok         ###   ########.fr       */
+/*   Updated: 2016/03/02 15:33:47 by ibakayok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,6 @@ char		**ft_strsplit(char const *s, char c)
 		while (*s != '\0' && *s != c)
 			s++;
 	}
-	tab[j] = '\0';
+	tab[j] = NULL;
 	return (tab);
 }
